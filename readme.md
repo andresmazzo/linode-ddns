@@ -1,5 +1,6 @@
 ## Introduction
-You are looking to implement Dynamic DNS for your cool router which has installed OpenWRT? Continue reading to learn how!
+You are looking to implement Dynamic DNS to link some cool domain you own to your crazy home?
+Do you have a router with OpenWRT installed? An SBC or a NAS? Maybe some unix system? Continue reading to learn how!
 
 There are multiple DDNS Providers with a free option, afraid.org sounds good. But, if you already has a cloud provider who manage your domain, why add one more service? Simplicity is the first rule.
 
