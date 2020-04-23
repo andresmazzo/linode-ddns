@@ -12,46 +12,54 @@ This project implements Linode API V4.
 
 ## Description
 Excellent. You have an account. Create a Personal Access Token to be used in Linode API V4.
-After that, we need domain and record id. Why? Because script request api to compare dns id with router current id.
+
+After that, we need domain and record id. Why? Because script request API to compare DNS IP with router current Public IP address.
+
 Check at your domain if there is a record "A" pointing to your home IP. Wait, do you know which IP your ISP is giving you?
 
 ## Usage
-> Install `curl` package, it could be done via Luci gui or from ssh.
+> Install `curl` package, it could be done via LuCI gui or from ssh.
 
-1. First
+**First Step**
 OpenWRT hasn't git installed, but don't worry.
-Clone repo:
+1. Clone repo:
 `git clone git@github.com:andresmazzo/linode-ddns.git`
-Transfer repo via scp:
+2. Transfer repo via scp:
 `scp -r linode-ddns/ your-username@your-router-ip:/etc/`
-Connect to router via ssh:
+3. Connect to router via ssh:
 `ssh your-username@your-router-ip`
 `cd /etc/linode-ddns`
-Set config file:
+4. Set config file:
 `cp vars.conf.example vars.conf`
-Make scripts executable:
+5. Make scripts executable:
 ```
 chmod +x linode-ddns.sh
 chmod +x scripts/get-public-ip.sh
 chmod +x scripts/get-dns-ip.sh
 chmod +x scripts/update-dns-ip.sh
 ```
-Run script:
+6. Run script:
 `./linode-ddns.sh`
-Go to Luci gui at `http://your-ip`. Login, and go to `Status=>System Log`. Scroll and at the end you should see something..
 
-1. Second
-Would be great to automate it, yeah.
-Execute cronjob, so script runs automatically 3 times per hour. Use crontab -e, or "Scheduled Tasks" from LuCI, and add the following lines.
+Go to LuCI gui at `http://your-ip`. Login, and go to `Status=>System Log`. Scroll and at the end you should see something..
+
+**Final Step**
+I guess you are thinking to automate it. We are not going to set a reminder to exec script every day.
+
+Automatically 3 times per hour i think it's fine.
+
+Use crontab -e, or "Scheduled Tasks" from LuCI, and add the following lines.
 ```
 # Check external IP address, and update Linode's DNS if changed
 5,25,45 * * * * /etc/linode-ddns/linode-ddns.sh
 ```
 Your public IP address will be updated no later 20 minutes if it changes!
 
-### Troubleshooting
+
+## Troubleshooting
 
 1. _Did you execute the script and a weird error was printed?_
+
 Relax. See `scripts/` directory and try executing one at a time to verify steps.
 
 ---
