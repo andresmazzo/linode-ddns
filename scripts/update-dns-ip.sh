@@ -12,7 +12,7 @@ curl -H "Content-Type: application/json" \
     -X PUT -d '{
       "type": "A",
       "name": "zero",
-      "target": "$NEW_IP",
+      "target": "'"$NEW_IP"'",
       "priority": 50,
       "weight": 50,
       "port": 80,
